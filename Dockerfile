@@ -4,6 +4,7 @@ COPY . .
 RUN pip install --upgrade pip && pip install \
     black \
     flake8 \
+    kaggle \
     mutmut \
     mypy \
     pylint \
