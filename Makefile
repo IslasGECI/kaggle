@@ -88,3 +88,5 @@ refactor: format
 	|| git restore ${module}/*.py tests/*.py
 	chmod g+w -R .
 
+submit_solution: submission.csv
+	kaggle competitions submit -c house-prices-advanced-regression-techniques -f submission.csv
