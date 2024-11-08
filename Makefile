@@ -13,7 +13,7 @@ all: check coverage mutants
 		setup \
 		tests
 
-module = dummy_transformations
+module = kaggle
 codecov_token = 6c56bccb-1758-4ed9-8161-97c845591c26
 
 define lint
@@ -46,6 +46,7 @@ coverage: setup
 	coverage report --show-missing
 
 format:
+	black --line-length 100 src
 	black --line-length 100 ${module}
 	black --line-length 100 tests
 
