@@ -8,7 +8,10 @@ author-email = "ciencia.datos@islas.org.mx"
 classifiers = [ "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",]
 description-file = "README.md"
 home-page = "https://github.com/IslasGECI/dummy_transformations"
-module = "dummy_transformations"
+module = "kaggle"
 requires = [
+	"sklearn",
+	"numpy",
+	"pandas"
 ]
 requires-python=">=3.9"
