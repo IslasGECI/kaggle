@@ -5,22 +5,29 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 # Read the data
-X_full = pd.read_csv('../input/train.csv', index_col='Id')
-X_test_full = pd.read_csv('../input/test.csv', index_col='Id')
+X_full = pd.read_csv("tests/data/train.csv", index_col='Id')
+X_test_full = pd.read_csv("tests/data/test.csv", index_col='Id')
+print("Old Shape: ", X_full.shape)
 # Remove outliers
 Q1 = np.percentile(X_full.SalePrice, 25, method='midpoint')
 Q3 = np.percentile(X_full.SalePrice, 75, method='midpoint')
 IQR = Q3 - Q1
 upper = Q3+1.5*IQR
-upper_array = np.array(X_full.SalePrice >= upper)
+lower = Q1-1.5*IQR
+# Create arrays of Boolean values indicating the outlier rows
+upper_array = np.where(X_full.SalePrice >= upper)[0]
+lower_array = np.where(X_full.SalePrice <= lower)[0]
+
 print("Upper Bound:", upper)
 print(upper_array.sum())
 
-lower = Q1-1.5*IQR
-lower_array = np.array(X_full.SalePrice <= lower)
 print("Lower Bound:", lower)
 print(lower_array.sum())
+outliers_indexes = np.concatenate((upper_array, lower_array))
+print(outliers_indexes)
+X_no_outliers = X_full.drop(index=outliers_indexes)
 
+print("New Shape: ", X_no_outliers.shape)
 
 # Obtain target and predictors
 y = X_full.SalePrice
@@ -30,7 +37,7 @@ X = X_full[features].copy()
 X_test = X_test_full[features].copy()
 
 # Break off validation set from training data
-X_train, X_valid, y_train, y_valid = train_test_split(X_no_outliers, y, train_size=0.80, test_size=0.2,
+X_train, X_valid, y_train, y_valid = train_test_split(X, y, train_size=0.80, test_size=0.2,
                                                       random_state=0)
 
 # Define the models
