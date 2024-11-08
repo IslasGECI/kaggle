@@ -16,7 +16,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        tags: islasgeci/dummy_transformations:latest
+        tags: islasgeci/kaggle:latest
         outputs: type=docker,dest=/tmp/image.tar
     - name: Upload artifact
       uses: actions/upload-artifact@main
@@ -41,9 +41,9 @@ jobs:
         docker load --input /tmp/image.tar
         docker image ls -a
     - name: Verifica el formato
-      run: docker run islasgeci/dummy_transformations:latest make check
+      run: docker run islasgeci/kaggle:latest make check
     - name: Corre pruebas y evalúa cobertura
-      run: docker run --volume $PWD:/workdir islasgeci/dummy_transformations:latest make coverage
+      run: docker run --volume $PWD:/workdir islasgeci/kaggle:latest make coverage
     - name: Upload coverage reports to Codecov with GitHub Action
       uses: codecov/codecov-action@main
       with:
