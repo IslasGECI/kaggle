@@ -5,7 +5,7 @@ submit_solution: submission.csv
 	kaggle competitions submit -c house-prices-advanced-regression-techniques -f submission.csv -m "Submission from API"
 
 submission.csv:
-	python3 src/house_prices.csv
+	python3 src/house_prices.py
 
 .PHONY: \
 		all \
