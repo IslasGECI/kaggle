@@ -1,4 +1,4 @@
-import kaggle as dt
+import kaggle_submissions as dt
 
 
 def test_add_offset():
