@@ -56,10 +56,10 @@ jobs:
         message: "Latest release"
         force_push_tag: true
     - name: Make submission
-      env: 
+      env:
         KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
         KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-        run: docker run --volume $PWD:/workdir --env KAGGLE_USERNAME=$KAGGLE_USERNAME --env KAGGLE_KEY=$KAGGLE_KEY islasgeci/kaggle:latest make submit_solution
+      run: docker run --volume $PWD:/workdir --env KAGGLE_USERNAME=$KAGGLE_USERNAME --env KAGGLE_KEY=$KAGGLE_KEY islasgeci/kaggle:latest make submit_solution
 
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
