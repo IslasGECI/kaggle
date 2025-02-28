@@ -1,5 +1,12 @@
 all: check coverage mutants
 
+
+submit_solution: submission.csv
+	kaggle competitions submit -c house-prices-advanced-regression-techniques -f submission.csv -m "Submission from API"
+
+submission.csv:
+	python3 src/house_prices.csv
+
 .PHONY: \
 		all \
 		check \
@@ -87,6 +94,3 @@ refactor: format
 	&& (git add ${module}/*.py tests/*.py && git commit -m "♻️  Refactor") \
 	|| git restore ${module}/*.py tests/*.py
 	chmod g+w -R .
-
-submit_solution: submission.csv
-	kaggle competitions submit -c house-prices-advanced-regression-techniques -f submission.csv
