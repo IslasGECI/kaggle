@@ -4,7 +4,7 @@ all: check coverage mutants
 submit_solution: submission.csv
 	kaggle competitions submit -c house-prices-advanced-regression-techniques -f submission.csv -m "Submission from API"
 
-submission.csv:
+submission.csv: setup
 	python3 src/house_prices.py
 
 .PHONY: \
@@ -21,7 +21,7 @@ submission.csv:
 		tests
 
 module = kaggle_submissions
-codecov_token = 6c56bccb-1758-4ed9-8161-97c845591c26
+codecov_token = 9adb4eb0-093e-4711-8d39-c5936a6e996d
 
 define lint
 	pylint \
